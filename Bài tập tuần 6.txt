@@ -1,0 +1,250 @@
+-- Tạo bảng NganHang
+CREATE TABLE NganHang (
+    MaNH NUMBER PRIMARY KEY,
+    TenNH NVARCHAR2(100) NOT NULL
+);
+
+-- Tạo bảng ChiNhanh
+CREATE TABLE ChiNhanh (
+    MaNH NUMBER,
+    MaCN NVARCHAR2(10) PRIMARY KEY,
+    ThanhPhoCN NVARCHAR2(50),
+    TaiSan NUMBER,
+    FOREIGN KEY (MaNH) REFERENCES NganHang(MaNH)
+);
+
+-- Tạo bảng KhachHang
+CREATE TABLE KhachHang (
+    MaKH NUMBER PRIMARY KEY,
+    TenKH NVARCHAR2(100) NOT NULL,
+    DiaChi NVARCHAR2(200)
+);
+
+-- Tạo bảng TaiKhoanVay
+CREATE TABLE TaiKhoanVay (
+    MaKH NUMBER,
+    MaCN NVARCHAR2(10),
+    SoTKV NVARCHAR2(10) PRIMARY KEY,
+    SoTienVay NUMBER,
+    FOREIGN KEY (MaKH) REFERENCES KhachHang(MaKH),
+    FOREIGN KEY (MaCN) REFERENCES ChiNhanh(MaCN)
+);
+
+-- Tạo bảng TaiKhoanGoi
+CREATE TABLE TaiKhoanGoi (
+    MaKH NUMBER,
+    MaCN NVARCHAR2(10),
+    SoTKG NVARCHAR2(10) PRIMARY KEY,
+    SoTienGoi NUMBER,
+    FOREIGN KEY (MaKH) REFERENCES KhachHang(MaKH),
+    FOREIGN KEY (MaCN) REFERENCES ChiNhanh(MaCN)
+);
+
+-- Thêm dữ liệu vào bảng NganHang
+INSERT INTO NganHang VALUES (1, N'Ngan Hang Cong Thuong');
+INSERT INTO NganHang VALUES (2, N'Ngan Hang Ngoai Thuong');
+INSERT INTO NganHang VALUES (3, N'Ngan Hang Nong Nghiep');
+INSERT INTO NganHang VALUES (4, N'Ngan Hang A Chau');
+INSERT INTO NganHang VALUES (5, N'Ngan Hang Thuong Tin');
+
+-- Thêm dữ liệu vào bảng ChiNhanh
+INSERT INTO ChiNhanh VALUES (1, 'CN01', N'Da Lat', 2000000000);
+INSERT INTO ChiNhanh VALUES (2, 'CN02', N'Nha Trang', 2700000000);
+INSERT INTO ChiNhanh VALUES (3, 'CN03', N'Thanh Hoa', 4500000000);
+INSERT INTO ChiNhanh VALUES (4, 'CN04', N'TP HCM', 6000000000);
+INSERT INTO ChiNhanh VALUES (5, 'CN05', N'Da Nang', 7000000000);
+INSERT INTO ChiNhanh VALUES (1, 'CN11', N'TP HCM', 5000000000);
+INSERT INTO ChiNhanh VALUES (2, 'CN12', N'Hue', 1400000000);
+INSERT INTO ChiNhanh VALUES (3, 'CN13', N'Da Nang', 3600000000);
+INSERT INTO ChiNhanh VALUES (4, 'CN14', N'Ha Noi', 5700000000);
+INSERT INTO ChiNhanh VALUES (1, 'CN21', N'Ha Noi', 3500000000);
+INSERT INTO ChiNhanh VALUES (2, 'CN22', N'Ha Noi', 4500000000);
+INSERT INTO ChiNhanh VALUES (3, 'CN23', N'Da Lat', 2400000000);
+INSERT INTO ChiNhanh VALUES (1, 'CN31', N'Da Nang', 4000000000);
+INSERT INTO ChiNhanh VALUES (2, 'CN32', N'TP HCM', 5600000000);
+INSERT INTO ChiNhanh VALUES (3, 'CN33', N'Can Tho', 5400000000);
+INSERT INTO ChiNhanh VALUES (3, 'CN43', N'Nam Dinh', 3600000000);
+
+-- Thêm dữ liệu vào bảng KhachHang
+INSERT INTO KhachHang VALUES (111222333, N'Ho Thi Thanh Thao', N'456 Le Duan, Ha Noi');
+INSERT INTO KhachHang VALUES (112233445, N'Tran Van Tien', N'12 Dien Bien Phu, Q1, TP HCM');
+INSERT INTO KhachHang VALUES (123123123, N'Phan Thi Quynh Nhu', N'54 Hai Ba Trung, Ha Noi');
+INSERT INTO KhachHang VALUES (123412341, N'Nguyen Van Thao', N'34 Tran Phu, TP Nha Trang');
+INSERT INTO KhachHang VALUES (123456789, N'Nguyen Thi Hoa', N'1/4 Hoang Van Thu, Da Lat');
+INSERT INTO KhachHang VALUES (221133445, N'Nguyen Thi Kim Mai', N'4 Tran Binh Trong, Da Lat');
+INSERT INTO KhachHang VALUES (222111333, N'Do Tien Dong', N'123 Tran Phu, Nam Dinh');
+INSERT INTO KhachHang VALUES (331122445, N'Bui Thi Dong', N'345 Tran Hung Dao, Thanh Hoa');
+INSERT INTO KhachHang VALUES (333111222, N'Tran Dinh Hung', N'783 Ly Thuong Kiet, Can Tho');
+INSERT INTO KhachHang VALUES (441122335, N'Nguyen dinh Cuong', N'P12 Thanh Xuan Nam, Q Thanh Xuan');
+INSERT INTO KhachHang VALUES (456456456, N'Tran Nam Son', N'5 Le Duan, TP Da Nang');
+INSERT INTO KhachHang VALUES (551122334, N'Tran Thi Khanh Van', N'1A Ho Tung Mau, Da Lat');
+INSERT INTO KhachHang VALUES (987654321, N'Ho Thanh Son', N'209 Tran Hung Dao, Q5, TP HCM');
+
+-- Thêm dữ liệu vào bảng TaiKhoanGoi
+INSERT INTO TaiKhoanGoi VALUES (123123123, 'CN01', '00001A', 10000000);
+INSERT INTO TaiKhoanGoi VALUES (123456789, 'CN01', '00001C', 127000000);
+INSERT INTO TaiKhoanGoi VALUES (221133445, 'CN02', '00002A', 12500000);
+INSERT INTO TaiKhoanGoi VALUES (456456456, 'CN03', '00003H', 123000000);
+INSERT INTO TaiKhoanGoi VALUES (222111333, 'CN05', '00005A', 1200000);
+INSERT INTO TaiKhoanGoi VALUES (987654321, 'CN05', '00005D', 345000000);
+INSERT INTO TaiKhoanGoi VALUES (123412341, 'CN05', '00005N', 45000000);
+INSERT INTO TaiKhoanGoi VALUES (331122445, 'CN13', '00003A', 27000000);
+INSERT INTO TaiKhoanGoi VALUES (551122334, 'CN14', '00004D', 560000000);
+INSERT INTO TaiKhoanGoi VALUES (123456789, 'CN14', '00004P', 35400000);
+INSERT INTO TaiKhoanGoi VALUES (123412341, 'CN21', '00001B', 67000000);
+INSERT INTO TaiKhoanGoi VALUES (222111333, 'CN22', '00002G', 56000000);
+INSERT INTO TaiKhoanGoi VALUES (987654321, 'CN23', '00004F', 4500000);
+INSERT INTO TaiKhoanGoi VALUES (333111222, 'CN33', '00003D', 47000000);
+
+-- Thêm dữ liệu vào bảng TaiKhoanVay
+INSERT INTO TaiKhoanVay VALUES (111222333, 'CN01', '10001A', 10000000);
+INSERT INTO TaiKhoanVay VALUES (333111222, 'CN02', '10002A', 6000000);
+INSERT INTO TaiKhoanVay VALUES (551122334, 'CN04', '10004A', 20000000);
+INSERT INTO TaiKhoanVay VALUES (221133445, 'CN05', '10005G', 15000000);
+INSERT INTO TaiKhoanVay VALUES (987654321, 'CN11', '10001D', 45000000);
+INSERT INTO TaiKhoanVay VALUES (112233445, 'CN12', '10002D', 12000000);
+INSERT INTO TaiKhoanVay VALUES (441122335, 'CN13', '10003F', 5500000);
+INSERT INTO TaiKhoanVay VALUES (123123123, 'CN14', '10005A', 12500000);
+
+COMMIT;
+
+SELECT * FROM NganHang;
+SELECT * FROM ChiNhanh;
+SELECT * FROM KhachHang;
+SELECT * FROM TaiKhoanGoi;
+SELECT * FROM TaiKhoanVay;
+
+-- CÂU 1: Tìm tên tất cả các ngân hàng có chi nhánh ngân hàng ở thành phố "Da Lat"
+SELECT DISTINCT NH.TenNH
+FROM NganHang NH
+JOIN ChiNhanh CN ON NH.MaNH = CN.MaNH
+WHERE CN.ThanhPhoCN = N'Da Lat';
+
+-- CÂU 2: Tìm tất cả những thành phố mà có chi nhánh của ngân hàng công thương
+SELECT DISTINCT CN.ThanhPhoCN
+FROM ChiNhanh CN
+JOIN NganHang NH ON CN.MaNH = NH.MaNH
+WHERE NH.TenNH = N'Ngan Hang Cong Thuong';
+
+-- CÂU 3: Tìm thông tin về tất cả các chi nhánh của ngân hàng công thương có địa điểm ở TP HCM
+SELECT CN.*
+FROM ChiNhanh CN
+JOIN NganHang NH ON CN.MaNH = NH.MaNH
+WHERE NH.TenNH = N'Ngan Hang Cong Thuong' 
+  AND CN.ThanhPhoCN = N'TP HCM';
+
+-- CÂU 4: Xuất thông tin từng ngân hàng và chi nhánh của nó
+SELECT NH.TenNH, CN.MaCN, CN.ThanhPhoCN, CN.TaiSan
+FROM NganHang NH
+JOIN ChiNhanh CN ON NH.MaNH = CN.MaNH
+ORDER BY NH.TenNH, CN.MaCN;
+
+-- CÂU 5: Tìm khách hàng mà địa chỉ của họ ở 'Ha Noi'
+SELECT *
+FROM KhachHang
+WHERE DiaChi LIKE N'%Ha Noi%';
+
+-- CÂU 6: Tìm các khách hàng có tên Son
+SELECT *
+FROM KhachHang
+WHERE TenKH LIKE N'%Son%';
+
+-- CÂU 7: Tìm các khách hàng mà địa chỉ của họ ở đường "Tran Hung Dao"
+SELECT *
+FROM KhachHang
+WHERE DiaChi LIKE N'%Tran Hung Dao%';
+
+-- CÂU 8: Tìm các khách hàng có tên "Thao"
+SELECT *
+FROM KhachHang
+WHERE TenKH LIKE N'%Thao%';
+
+-- CÂU 9: Tìm khách hàng có mã số bắt đầu là '11' và ở TP HCM
+SELECT *
+FROM KhachHang
+WHERE MaKH LIKE '11%' 
+  AND DiaChi LIKE N'%TP HCM%';
+
+-- CÂU 10: Xuất thông tin về tên ngân hàng, thành phố chi nhánh và tài sản 
+--         theo thứ tự tăng của tài sản của chi nhánh, nếu tài sản trùng nhau 
+--         thì sắp tăng theo thành phố chi nhánh
+SELECT NH.TenNH, CN.ThanhPhoCN, CN.TaiSan
+FROM NganHang NH
+JOIN ChiNhanh CN ON NH.MaNH = CN.MaNH
+ORDER BY CN.TaiSan ASC, CN.ThanhPhoCN ASC;
+
+-- CÂU 11: Tìm thông tin tất cả những thông tin về ngân hàng và chi nhánh ngân hàng 
+--         mà tài sản 3000000000 < tài sản < 5000000000
+SELECT NH.*, CN.*
+FROM NganHang NH
+JOIN ChiNhanh CN ON NH.MaNH = CN.MaNH
+WHERE CN.TaiSan > 3000000000 AND CN.TaiSan < 5000000000;
+
+-- CÂU 12: Cho biết tài sản trung bình chi nhánh của từng ngân hàng
+SELECT NH.TenNH, AVG(CN.TaiSan) AS TaiSanTrungBinh
+FROM NganHang NH
+JOIN ChiNhanh CN ON NH.MaNH = CN.MaNH
+GROUP BY NH.TenNH;
+
+-- CÂU 13: Tìm thông tin của khách hàng có tài khoản vay tại ngân hàng công thương 
+--         và có tên là 'Thao'
+SELECT DISTINCT KH.*
+FROM KhachHang KH
+JOIN TaiKhoanVay TKV ON KH.MaKH = TKV.MaKH
+JOIN ChiNhanh CN ON TKV.MaCN = CN.MaCN
+JOIN NganHang NH ON CN.MaNH = NH.MaNH
+WHERE NH.TenNH = N'Ngan Hang Cong Thuong' 
+  AND KH.TenKH LIKE N'%Thao%';
+
+-- CÂU 14: Xuất thông tin về tên ngân hàng và tổng tài sản của các ngân hàng
+SELECT NH.TenNH, SUM(CN.TaiSan) AS TongTaiSan
+FROM NganHang NH
+JOIN ChiNhanh CN ON NH.MaNH = CN.MaNH
+GROUP BY NH.TenNH;
+
+-- CÂU 15: Tìm MaCN và TaiSan của chi nhánh có tài sản lớn nhất
+SELECT MaCN, TaiSan
+FROM ChiNhanh
+WHERE TaiSan = (SELECT MAX(TaiSan) FROM ChiNhanh);
+
+-- CÂU 16: Liệt kê tất cả những khách hàng có tài khoản gởi tại chi nhánh 
+--         ngân hàng "A Chau"
+SELECT DISTINCT KH.*
+FROM KhachHang KH
+JOIN TaiKhoanGoi TKG ON KH.MaKH = TKG.MaKH
+JOIN ChiNhanh CN ON TKG.MaCN = CN.MaCN
+JOIN NganHang NH ON CN.MaNH = NH.MaNH
+WHERE NH.TenNH = N'Ngan Hang A Chau';
+
+-- CÂU 17: Tìm tất cả các số tài khoản vay thực hiện tại chi nhánh của 
+--         ngân hàng ngoại thương mà số tiền vay > 1200000
+SELECT TKV.SoTKV, TKV.SoTienVay
+FROM TaiKhoanVay TKV
+JOIN ChiNhanh CN ON TKV.MaCN = CN.MaCN
+JOIN NganHang NH ON CN.MaNH = NH.MaNH
+WHERE NH.TenNH = N'Ngan Hang Ngoai Thuong' 
+  AND TKV.SoTienVay > 1200000;
+
+-- CÂU 18: Tính tổng số tiền mà mỗi chi nhánh ngân hàng đang được khách hàng gởi
+SELECT CN.MaCN, CN.ThanhPhoCN, SUM(TKG.SoTienGoi) AS TongTienGoi
+FROM ChiNhanh CN
+LEFT JOIN TaiKhoanGoi TKG ON CN.MaCN = TKG.MaCN
+GROUP BY CN.MaCN, CN.ThanhPhoCN
+ORDER BY CN.MaCN;
+
+-- CÂU 19: Xuất thông tin về tài khoản vay và tài khoản gởi hiện có của 
+--         tất cả các khách hàng có tên là 'Son'
+SELECT KH.MaKH, KH.TenKH, TKV.SoTKV, TKV.SoTienVay, 
+       TKG.SoTKG, TKG.SoTienGoi
+FROM KhachHang KH
+LEFT JOIN TaiKhoanVay TKV ON KH.MaKH = TKV.MaKH
+LEFT JOIN TaiKhoanGoi TKG ON KH.MaKH = TKG.MaKH
+WHERE KH.TenKH LIKE N'%Son%';
+
+-- CÂU 20: Tìm thông tin về khách hàng có tổng số tiền vay tại tất cả các 
+--         ngân hàng > 30000000
+SELECT KH.*, SUM(TKV.SoTienVay) AS TongTienVay
+FROM KhachHang KH
+JOIN TaiKhoanVay TKV ON KH.MaKH = TKV.MaKH
+GROUP BY KH.MaKH, KH.TenKH, KH.DiaChi
+HAVING SUM(TKV.SoTienVay) > 30000000;
